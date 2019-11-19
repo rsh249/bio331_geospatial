@@ -6,6 +6,7 @@ library(rasterExtras)
 library(RSpatial)
 library(spocc)
 library(dplyr)
+library(ENMeval)
 
 taxon = 'Vaccinium angustifolium'
 
@@ -33,14 +34,17 @@ occ2thin = poThin(
 sp_df = sp_df[-occ2thin,] #thin using index returned from occ2thin
 
 #plot
-ggplot() +
+dist_plot = ggplot() +
   geom_raster(data = wc_df, aes(x = x, y = y, fill = bio12)) +
   geom_point(data=sp_df, aes(x=longitude, y=latitude), col='green', cex=0.1) +
   coord_quickmap() +
   theme_bw() + 
   scale_fill_gradientn(colours=c('darkred', 'grey', 'navy', 'green'),
                        na.value = "black")
-
+ggsave(dist_plot, 
+       filename = paste("figures/", taxon, "_data.png", sep=""),
+       height=7.25, width = 7.25, units='in',
+       dpi = 300)
 #subset predictor variables
 
 predvars = c(1,2,3,12,16)
