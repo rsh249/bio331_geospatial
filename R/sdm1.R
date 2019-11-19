@@ -10,7 +10,7 @@ library(ENMeval)
 
 taxon = 'Vaccinium angustifolium'
 
-wc = getData('worldclim', var='bio', res = 5)
+wc = getData('worldclim', var='bio', res = 2.5)
 ext = extent(-125, -55, 20, 60)
 wc = crop(wc, ext)
 wc_df = as.data.frame(wc, xy=TRUE) # for plotting
@@ -55,11 +55,11 @@ preds = wc[[predvars]]
 eval = ENMevaluate(occ=sp_df[,c('longitude', 'latitude')], 
                    env = preds, 
                    method='randomkfold', 
-                   kfolds=10, 
+                   kfolds=100, 
                    parallel=TRUE, 
                    numCores = 12, 
-                   fc=c("L", "Q", "LQ"), 
-                   RMvalues=seq(0.5, 2, 0.5), 
+                   fc=c("L", "Q", "LQ", "LQH", "LQHPT"), 
+                   RMvalues=seq(0.5, 4, 0.5), 
                    rasterPreds=T)
 
 
