@@ -17,6 +17,10 @@ if (length(argv) > 0) {
   q('no') #exit without saving
 }
 
+#set gbif download limit
+maxrec=20000
+
+
 # set up predictor data parameters
 res=2.5
 path='tmp/'
@@ -60,7 +64,7 @@ wc = crop(wc, ext)
 wc_df = as.data.frame(wc, xy=TRUE) # data frame for plotting
 
 #downloading
-spdist <- occ(query=taxon, limit=6500) # check limit for your species
+spdist <- occ(query=taxon, limit=maxrec) # check limit for your species
 sp_df = occ2df(spdist)
 
 #filtering
