@@ -20,7 +20,10 @@ spdist <- occ(query=taxon, limit=6500) # check limit for your species
 sp_df = occ2df(spdist)
 
 #filtering
-sp_df = sp_df %>% filter(longitude>=ext[1], longitude<=ext[2], latitude>=ext[3], latitude <=ext[4]) #dplyr filter points to study area
+sp_df = sp_df %>% filter(longitude>=ext[1], 
+                         longitude<=ext[2], 
+                         latitude>=ext[3], 
+                         latitude <=ext[4]) #dplyr filter points to study area
 
 #thinning
 occ2thin = poThin(

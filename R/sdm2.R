@@ -45,6 +45,7 @@ wc_future26 = future = getData('CMIP5',
                                year =70, 
                                path = path)
 
+
 #subset predictor variables
 preds = wc[[predvars]]
 preds26 = wc_future26[[predvars]]
