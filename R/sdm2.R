@@ -8,48 +8,62 @@ library(spocc)
 library(dplyr)
 library(ENMeval)
 
-taxon = 'Vaccinium angustifolium'
+#accepting a commandline argument
+argv <-commandArgs(TRUE)
+if (length(argv) > 0) {
+  taxon <- as.numeric(argv[1])
+} else {
+  print("NO TAXON SUBMITTED. TERMINATING JOB!")
+  q('no') #exit without saving
+}
+
+# set up predictor data parameters
+res=2.5
+path='tmp/'
+predvars = c(1,2,3,12,16) # subset of bioclim variables as predictors
+
 
 wc = getData('worldclim', 
              var='bio', 
-             res = 2.5, 
-             path="tmp/")
+             res = res, 
+             path = path)
 
 
 wc_future85 = future = getData('CMIP5', 
                              var='bio', 
-                             res=2.5, 
+                             res=res, 
                              rcp = 85, 
                              model='AC', 
                              year=70, 
-                             path='tmp/')
+                             path = path)
 
 wc_future26 = future = getData('CMIP5', 
-                               var='bio', 
-                               res=2.5, 
+                               var = 'bio', 
+                               res = res, 
                                rcp = 26, 
                                model='AC', 
-                               year=70, 
-                               path='tmp/')
+                               year =70, 
+                               path = path)
 
 #subset predictor variables
-
-predvars = c(1,2,3,12,16)
 preds = wc[[predvars]]
 preds26 = wc_future26[[predvars]]
 preds85 = wc_future85[[predvars]]
 
 # crop to study area
-ext = extent(-125, -55, 20, 60)
+ext = extent(-125, -55, 20, 60) 
 wc = crop(wc, ext)
-wc_df = as.data.frame(wc, xy=TRUE) # for plotting
+wc_df = as.data.frame(wc, xy=TRUE) # data frame for plotting
 
 #downloading
 spdist <- occ(query=taxon, limit=6500) # check limit for your species
 sp_df = occ2df(spdist)
 
 #filtering
-sp_df = sp_df %>% filter(longitude>=ext[1], longitude<=ext[2], latitude>=ext[3], latitude <=ext[4]) #dplyr filter points to study area
+sp_df = sp_df %>% filter(longitude >= ext[1], 
+                         longitude <= ext[2], 
+                         latitude >= ext[3], 
+                         latitude <= ext[4]) #dplyr filter points to study area
 
 #thinning
 occ2thin = poThin(
