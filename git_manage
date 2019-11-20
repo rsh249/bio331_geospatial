@@ -1,0 +1,9 @@
+#add the figures and data folders to the repo
+git add figures/*
+git add data/*
+
+#commit changes made to any repository file
+git commit -m "test_commit"
+
+#update github.com version
+git push
