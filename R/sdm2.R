@@ -11,7 +11,7 @@ library(ENMeval)
 #accepting a commandline argument
 argv <-commandArgs(TRUE)
 if (length(argv) > 0) {
-  taxon <- as.numeric(argv[1])
+  taxon <- as.character(argv[1])
 } else {
   print("NO TAXON SUBMITTED. TERMINATING JOB!")
   q('no') #exit without saving
