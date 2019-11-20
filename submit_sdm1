@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+#Number of cores requested
+#$ -pe omp 12
+
+#Give the name to the job
+#$ -N SDM_ENMeval
+
+#Send an email when the job is finished (or aborted)
+#$ -m ae
+
+#Join the error and output file
+#$ -j y
+
+
+# Set the runtime limit (default 12 hours):
+#$ -l h_rt=12:00:00
+
+# Specify your project
+#$ -P ct-shbioinf
+
+module load R/3.6.0
+
+cd /project/ct-shbioinf/rharbert/bio331-geospatial
+
+Rscript R/sdm1.R
