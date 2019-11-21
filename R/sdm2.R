@@ -60,8 +60,11 @@ preds85 = wc_future85[[predvars]]
 
 # crop to study area
 ext = extent(-125, -55, 20, 60) 
-wc = crop(wc, ext)
-wc_df = as.data.frame(wc, xy=TRUE) # data frame for plotting
+preds = crop(preds, ext)
+preds26 = crop(preds26, ext)
+preds85 = crop(preds85, ext)
+
+preds_df = as.data.frame(preds, xy=TRUE) # data frame for plotting
 
 #downloading
 spdist <- occ(query=taxon, limit=maxrec) # check limit for your species
@@ -86,7 +89,7 @@ sp_df = sp_df[-occ2thin,] #thin using index returned from occ2thin
 
 #plot
 dist_plot = ggplot() +
-  geom_raster(data = wc_df, aes(x = x, y = y, fill = bio12)) +
+  geom_raster(data = preds_df, aes(x = x, y = y, fill = bio12)) +
   geom_point(data=sp_df, aes(x=longitude, y=latitude), col='green', cex=0.1) +
   coord_quickmap() +
   theme_bw() + 
@@ -183,10 +186,10 @@ ggsave(max_plot26,
        height=7.25, width = 7.25, units='in',
        dpi = 300)
 
-pr_future26 = predict(preds26, 
+pr_future85 = predict(preds85, 
                       eval@models[[bestmod]], 
                       type = 'cloglog')
-pr_df26 = as.data.frame(pr_future26, xy=T)
+pr_df85 = as.data.frame(pr_future85, xy=T)
 
 #heatmap
 max_plot85 = ggplot() +
