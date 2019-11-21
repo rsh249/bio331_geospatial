@@ -1,7 +1,9 @@
 #!/bin/sh -l
 #
 #Number of cores requested
-#$ -pe omp 12
+#$ -pe omp 16
+
+#$ -l mem_per_core=16
 
 #Give the name to the job
 #$ -N SDM_ENMeval
