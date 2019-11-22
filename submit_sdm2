@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/bash -l
 #
 #Number of cores requested
 #$ -pe omp 16
