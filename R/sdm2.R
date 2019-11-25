@@ -37,7 +37,7 @@ wc_future85 = future = getData('CMIP5',
                              var='bio', 
                              res=res, 
                              rcp = 85, 
-                             model='BC', 
+                             model='CC', 
                              year=70, 
                              path = path)
 
@@ -45,7 +45,7 @@ wc_future26 = future = getData('CMIP5',
                                var = 'bio', 
                                res = res, 
                                rcp = 26, 
-                               model='BC', 
+                               model='CC', 
                                year =70, 
                                path = path)
 
