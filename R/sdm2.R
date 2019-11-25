@@ -104,9 +104,10 @@ ggsave(dist_plot,
 # ENMevaluate
 
 eval = ENMevaluate(occ=sp_df[,c('longitude', 'latitude')], 
-                   env = preds, 
-                   method='randomkfold', 
-                   kfolds=100, 
+                   env = preds,
+                   method = 'block',
+                   #method='randomkfold', 
+                   #kfolds=100, 
                    parallel=TRUE, 
                    numCores = 12, 
                    fc=c("L", "Q", "LQ", "LQH", "LQHPT"), 
