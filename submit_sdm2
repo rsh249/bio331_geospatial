@@ -23,6 +23,4 @@
 
 module load R/3.6.0
 
-cd /project/ct-shbioinf/rharbert/bio331-geospatial
-
 Rscript R/sdm2.R "Pinus strobus"
