@@ -110,7 +110,7 @@ eval = ENMevaluate(occ=sp_df[,c('longitude', 'latitude')],
                    #kfolds=100, 
                    parallel=TRUE, 
                    numCores = 12, 
-                   fc=c("L", "Q", "LQ", "LQH", "LQHPT"), 
+                   fc=c("L", "Q", "LQ", "LQH"), 
                    RMvalues=seq(0.5, 4, 0.5), 
                    rasterPreds=T)
 
