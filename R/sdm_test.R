@@ -58,7 +58,7 @@ preds = wc[[predvars]]
 eval = ENMevaluate(occ=sp_df[,c('longitude', 'latitude')], 
                    env = preds, 
                    method='randomkfold', 
-                   kfolds=100, 
+                   kfolds=10, 
                    parallel=TRUE, 
                    numCores = 12, 
                    fc=c("L", "Q", "LQ" ), 
